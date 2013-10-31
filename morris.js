@@ -1650,7 +1650,7 @@
       for (i = _j = 0, _len1 = _ref1.length; _j < _len1; i = ++_j) {
         value = _ref1[i];
         next = last + min + C * (value / total);
-        seg = new Morris.DonutSegment(cx, cy, w * 2, w, last, next, this.data[i].color || this.options.colors[idx % this.options.colors.length], this.options.backgroundColor, idx, this.raphael);
+        seg = new Morris.DonutSegment(cx, cy, w * 2, w, last, next, this.data[i].color || this.options.colors[idx % this.options.colors.length], this.options.backgroundColor, idx, this.data[i].href || null, this.raphael);
         seg.render();
         this.segments.push(seg);
         seg.on('hover', this.select);
@@ -1743,7 +1743,7 @@
   Morris.DonutSegment = (function(_super) {
     __extends(DonutSegment, _super);
 
-    function DonutSegment(cx, cy, inner, outer, p0, p1, color, backgroundColor, index, raphael) {
+    function DonutSegment(cx, cy, inner, outer, p0, p1, color, backgroundColor, index, href, raphael) {
       this.cx = cx;
       this.cy = cy;
       this.inner = inner;
@@ -1751,6 +1751,7 @@
       this.color = color;
       this.backgroundColor = backgroundColor;
       this.index = index;
+      this.href = href;
       this.raphael = raphael;
       this.deselect = __bind(this.deselect, this);
       this.select = __bind(this.select, this);
@@ -1803,7 +1804,8 @@
       return this.raphael.path(path).attr({
         fill: fillColor,
         stroke: strokeColor,
-        'stroke-width': 3
+        'stroke-width': 3,
+        href: this.href
       }).hover(hoverFunction).click(clickFunction);
     };
 

@@ -77,7 +77,7 @@ class Morris.Donut extends Morris.EventEmitter
       seg = new Morris.DonutSegment(
         cx, cy, w*2, w, last, next,
         @data[i].color || @options.colors[idx % @options.colors.length],
-        @options.backgroundColor, idx, @raphael)
+        @options.backgroundColor, idx, @data[i].href || null, @raphael)
       seg.render()
       @segments.push seg
       seg.on 'hover', @select
@@ -135,7 +135,7 @@ class Morris.Donut extends Morris.EventEmitter
 #
 # @private
 class Morris.DonutSegment extends Morris.EventEmitter
-  constructor: (@cx, @cy, @inner, @outer, p0, p1, @color, @backgroundColor, @index, @raphael) ->
+  constructor: (@cx, @cy, @inner, @outer, p0, p1, @color, @backgroundColor, @index, @href, @raphael) ->
     @sin_p0 = Math.sin(p0)
     @cos_p0 = Math.cos(p0)
     @sin_p1 = Math.sin(p1)
@@ -184,7 +184,7 @@ class Morris.DonutSegment extends Morris.EventEmitter
 
   drawDonutSegment: (path, fillColor, strokeColor, hoverFunction, clickFunction) ->
     @raphael.path(path)
-      .attr(fill: fillColor, stroke: strokeColor, 'stroke-width': 3)
+      .attr(fill: fillColor, stroke: strokeColor, 'stroke-width': 3, href: @href)
       .hover(hoverFunction)
       .click(clickFunction)
 
