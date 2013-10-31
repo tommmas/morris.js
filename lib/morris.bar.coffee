@@ -108,7 +108,7 @@ class Morris.Bar extends Morris.Grid
           size = bottom - top
 
           top -= lastTop if @options.stacked
-          @drawBar(left, top, barWidth, size, @colorFor(row, sidx, 'bar'))
+          @drawBar(left, top, barWidth, size, @colorFor(row, sidx, 'bar'), row.href)
 
           lastTop += size
         else
@@ -181,7 +181,8 @@ class Morris.Bar extends Morris.Grid
       .attr('font-weight', @options.gridTextWeight)
       .attr('fill', @options.gridTextColor)
 
-  drawBar: (xPos, yPos, width, height, barColor) ->
+  drawBar: (xPos, yPos, width, height, barColor, href) ->
     @raphael.rect(xPos, yPos, width, height)
       .attr('fill', barColor)
       .attr('stroke-width', 0)
+      .attr('href', href)

@@ -1498,7 +1498,7 @@
                 if (this.options.stacked) {
                   top -= lastTop;
                 }
-                this.drawBar(left, top, barWidth, size, this.colorFor(row, sidx, 'bar'));
+                this.drawBar(left, top, barWidth, size, this.colorFor(row, sidx, 'bar'), row.href);
                 _results1.push(lastTop += size);
               } else {
                 _results1.push(null);
@@ -1577,8 +1577,8 @@
       return label = this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
 
-    Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor) {
-      return this.raphael.rect(xPos, yPos, width, height).attr('fill', barColor).attr('stroke-width', 0);
+    Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor, href) {
+      return this.raphael.rect(xPos, yPos, width, height).attr('fill', barColor).attr('stroke-width', 0).attr('href', href);
     };
 
     return Bar;
